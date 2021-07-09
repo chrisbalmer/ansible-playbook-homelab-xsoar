@@ -1,0 +1,16 @@
+- name: Setup XSOAR Servers
+  hosts: xsoar
+  gather_facts: yes
+  become: yes
+  pre_tasks:
+    - name: Combine composes
+      set_fact:
+        composes: "{{ composes|default({}) | combine(hostvars[inventory_hostname]['compose_' + item]|default({})) }}"
+      loop: "{{ group_names }}"
+  roles:
+    - /Users/chrisbalmer/code/ansible-role-yum-repos
+    - /Users/chrisbalmer/code/ansible-role-firewall
+    - /Users/chrisbalmer/code/ansible-role-nfs
+    - /Users/chrisbalmer/code/ansible-role-simple-docker
+    - /Users/chrisbalmer/code/ansible-role-docker-compose
+#    - /Users/chrisbalmer/code/ansible-role-xsoar
