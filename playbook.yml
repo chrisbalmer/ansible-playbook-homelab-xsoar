@@ -8,9 +8,9 @@
         composes: "{{ composes|default({}) | combine(hostvars[inventory_hostname]['compose_' + item]|default({})) }}"
       loop: "{{ group_names }}"
   roles:
-    - /Users/chrisbalmer/code/ansible-role-yum-repos
-    - /Users/chrisbalmer/code/ansible-role-firewall
-    - /Users/chrisbalmer/code/ansible-role-nfs
-    - /Users/chrisbalmer/code/ansible-role-simple-docker
-    - /Users/chrisbalmer/code/ansible-role-docker-compose
-#    - /Users/chrisbalmer/code/ansible-role-xsoar
+    - chrisbalmer.yum-repos
+    - chrisbalmer.firewall
+    - chrisbalmer.nfs
+    - chrisbalmer.simple-docker
+    - chrisbalmer.docker-compose
+#    - chrisbalmer.xsoar
